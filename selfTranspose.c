@@ -3,7 +3,7 @@
 
 int main(){
 	int **mat, r, c, i, m, n, j, k;
-	r = 7, c = 7; // row & col values
+	r = 3, c = 7; // row & col values
 	
 	m = r > c ? r : c; //max of r & c
 	n = r < c ? r : c; //min of r&c
