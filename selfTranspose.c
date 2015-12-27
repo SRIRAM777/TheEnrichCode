@@ -1,6 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+void printMat(int **mat, int r, int c){
+	int i,j;
+	for(i = 0; i < c ; ++i){
+		for (int j = 0; j < r; ++j){
+			printf("%d\t", mat[i][j] );
+		}
+		printf("\n");
+	}	
+}
+
 int main(){
 	int **mat, r, c, i, m, n, j, k;
 	r = 3, c = 7; // row & col values
@@ -29,11 +39,5 @@ int main(){
 			mat[i][j] += mat[j][i] - (mat[j][i] = mat[i][j]);
 		}
 	}
-
-	for(i = 0; i < c ; ++i){
-		for (int j = 0; j < r; ++j){
-			printf("%d\t", mat[i][j] );
-		}
-		printf("\n");
-	}	
+	printMat(mat,r,c);
 }
