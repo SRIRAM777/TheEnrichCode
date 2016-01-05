@@ -33,10 +33,11 @@ void switcherTri(int n){
 	int x[] = {1,2}, i, j, k;
 	for (i = 0; i < n; ++i)
 	{
+		k = i % 2;
 		for (j = 0; j <= i; ++j)
 		{
-			printf("%d ", x[i%2]);
-			x[i%2] += 2;
+			printf("%d ", x[k]);
+			x[k] += 2;
 		}
 		printf("\n");
 	}
