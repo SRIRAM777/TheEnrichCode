@@ -3,31 +3,35 @@
 int main(int argc, char const *argv[])
 {
 	int *a, *arr; 
-	int cc = 0, n, f, j, i, index = 0, l, k =10, count;
+	int cc = 0, n, f, j, t, i, index = 0, l, k =10, count;
 	scanf("%d", &n);
 	count = n;
-	a = (int*) malloc(sizeof(int) * 1 << n);
-	arr = (int*) malloc(sizeof(int) * n);
+	a = (int*) malloc(sizeof(int) * 1 << n); //temp array
+	arr = (int*) malloc(sizeof(int) * n); //base array
+
 	for( i = 0; i < n; i++){ 
-		arr[i] = i+1;
+		// load arrays with single digit
+		arr[i] = i+1; 
 		a[index++] = arr[i];
-		printf("%d\n", arr[i]);
+		printf("%d\n", arr[i]); //print output
 		cc++;
 	}
+
 	i = 0;
 	while(count--){
 		while(index < ((1 << n) -1)){
 			f = a[i];
-			l = a[i]%10;		
+			l = f % 10;	
+			t = f * k;	
 			for(j = l; j < n; j++){
-				a[index++] =  (f*k) + arr[j];
-				printf("%d\n", (f*k) + arr[j]);
+				a[index] =  t + arr[j];
+				printf("%d\n", a[index++]);
 				cc++;
 			}
 			i++;
 		}
 		k*=10;
 	}
-	printf("\t%d\n", cc);
+	printf("No of elements : \t%d\n", cc);
 	return 0;
 }
