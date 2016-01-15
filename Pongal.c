@@ -4,8 +4,8 @@
 int main(int argc, char const *argv[])
 {
 	system("clear");
-	char a[] = "Happy Pongal!";
-	for (int i = 0; i < 13; ++i)
+	char a[] = "Pongal Nalvaazhthukkal!";
+	for (int i = 0; a[i]!= '\0'; ++i)
 	{
 		printf("%c", a[i]);
 		sleep(1);
