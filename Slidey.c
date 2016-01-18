@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
 	int check;
 	moves = 0;
 	do{
-		printf("\nPress W -> Up, A -> Left, S -> Down, D -> Right, Q -> Quit\n");
+		printf("\nUse arrow keys for movement, Q -> Quit\n");
 		printf("Moves so far : %d\n", moves++);
 		if((c = getch()) == '\033'){
 			getch();
