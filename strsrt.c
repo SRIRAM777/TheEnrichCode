@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void numStrSrt(char *input, int n){
+void numStrSrt(char **input, int n){
 	for(int i = 0; i < n; i++){
 		for(int j = 0; j < (n - 1); j++){
 			if(strlen(input[j]) > strlen(input[j + 1]) || strlen(input[j]) == strlen(input[j + 1]) && strcmp(input[j], input[j + 1]) > 0){
