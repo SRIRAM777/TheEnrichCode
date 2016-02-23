@@ -5,38 +5,73 @@ struct student{
 	int sNo;
 	char name[100];
 	int marks[5];
+	int total;
+	float cutOff;
+	char grade;
 };
 
+int n = 15;
 typedef struct student stud;
-stud studentsList[10];
+stud studentsList[15];
+stud temp;
+
+void rankStudents(){
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < n; ++j)
+		{
+			if(studentsList[j].cutOff < studentsList[j + 1].cutOff ||
+				studentsList[j].cutOff == studentsList[j + 1].cutOff && 
+				studentsList[j].total < studentsList[j + 1].total ||
+				studentsList[j].total == studentsList[j + 1].total &&
+				studentsList[j].marks[3] < studentsList[j + 1].marks[3]){
+				temp = studentsList[j];
+				studentsList[j] = studentsList[j + 1];
+				studentsList[j + 1] = temp;
+			}
+		}
+	}
+}
+
 int main(int argc, char const *argv[])
 {
-
-	char headers[7][100];
 	char line[1000];
 	int i = 1;
-	FILE *csv = fopen("dataset.csv", "r");	
-	int total[5] = {0}, max[5] = {0};
-	fgets(line, sizeof(line), csv);
-	strcpy(headers[0], strtok(line, ","));
-	while(i < 7){
-		  strcpy(headers[i++], strtok(NULL, ","));
-	}
+	FILE *csv = fopen("ds.csv", "r");	
 	i = 0;
 	while(!feof(csv)){
 		fgets(line, sizeof(line), csv );
+
 		studentsList[i].sNo = atoi(strtok(line, ","));
 		strcpy(studentsList[i].name, strtok(NULL, ","));
+		studentsList[i].cutOff = 0;
+		studentsList[i].total = 0;
+		studentsList[i].grade = 'p';
+
 		for(int j = 0; j < 5; j++){
 			studentsList[i].marks[j] = atoi(strtok(NULL, ","));
-			total[j] += studentsList[i].marks[j];
-			max[j] = max[j] > studentsList[i].marks[j] ? max[j] : studentsList[i].marks[j];
+			studentsList[i].total += studentsList[i].marks[j]; 
+
+			if(studentsList[i].marks[j] < 70){
+				studentsList[i].grade = 'f';
+			}
+
+			if(j == 0){
+				studentsList[i].cutOff += (studentsList[i].marks[j]) / 2.0;
+			}else if(j == 1 || j == 2){
+				studentsList[i].cutOff += (studentsList[i].marks[j]) / 4.0;
+			}
+
 		}
 		i++;
 	}
-		printf("Subject\t\t\tAverage \tMaxMark\n");
-		for(int j = 0; j < 5; j++){
-			printf("%-11s\t\t%0.2f\t\t %d\n", headers[2+j], total[j] / 9.0, max[j] );
+	rankStudents();
+	int r = 1;
+	for(int i = 0; i < n; i++){
+		if(studentsList[i].grade == 'p'){
+			printf("%d \t%s \t%f\n", r++, studentsList[i].name, studentsList[i].cutOff );
 		}
+		
+	}
 	return 0;
 }
