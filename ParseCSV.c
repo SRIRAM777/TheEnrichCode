@@ -20,11 +20,11 @@ void rankStudents(){
 	{
 		for (int j = 0; j < n; ++j)
 		{
-			if(studentsList[j].cutOff < studentsList[j + 1].cutOff ||
-				studentsList[j].cutOff == studentsList[j + 1].cutOff && 
-				studentsList[j].total < studentsList[j + 1].total ||
-				studentsList[j].total == studentsList[j + 1].total &&
-				studentsList[j].marks[3] < studentsList[j + 1].marks[3]){
+			if((studentsList[j].cutOff < studentsList[j + 1].cutOff) ||
+			((studentsList[j].cutOff == studentsList[j + 1].cutOff) && 
+			(studentsList[j].total < studentsList[j + 1].total)) ||
+			((studentsList[j].total == studentsList[j + 1].total) &&
+			(studentsList[j].marks[3] < studentsList[j + 1].marks[3]))){
 				temp = studentsList[j];
 				studentsList[j] = studentsList[j + 1];
 				studentsList[j + 1] = temp;
@@ -38,6 +38,7 @@ int main(int argc, char const *argv[])
 	char line[1000];
 	int i = 1;
 	FILE *csv = fopen("ds.csv", "r");	
+	FILE *rcsv = fopen("rank.csv", "w");
 	i = 0;
 	while(!feof(csv)){
 		fgets(line, sizeof(line), csv );
@@ -69,7 +70,7 @@ int main(int argc, char const *argv[])
 	int r = 1;
 	for(int i = 0; i < n; i++){
 		if(studentsList[i].grade == 'p'){
-			printf("%d \t%s \t%f\n", r++, studentsList[i].name, studentsList[i].cutOff );
+			fprintf(rcsv, "%d \t%s \t%f\n", r++, studentsList[i].name, studentsList[i].cutOff );
 		}
 		
 	}
