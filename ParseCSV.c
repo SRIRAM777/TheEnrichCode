@@ -70,7 +70,7 @@ int main(int argc, char const *argv[])
 	int r = 1;
 	for(int i = 0; i < n; i++){
 		if(studentsList[i].grade == 'p'){
-			fprintf(rcsv, "%d \t%s \t%f\n", r++, studentsList[i].name, studentsList[i].cutOff );
+			fprintf(rcsv, "%d,%s,%0.2f\n", r++, studentsList[i].name, studentsList[i].cutOff );
 		}
 		
 	}
