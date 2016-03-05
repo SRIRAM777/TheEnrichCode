@@ -12,5 +12,6 @@ struct contact{
 	string contact_name;
 	string contact_street;
 	string area;
-	struct *contactPerson;
+	string city;
+	struct contactPerson *contactPersons;
 } *contacts;
