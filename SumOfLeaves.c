@@ -7,7 +7,7 @@ struct Node{
 	nodePtr right;
 };
 typedef nodePtr Tree; 
-
+int sum = 0;
 nodePtr createNode(int element){
 	Tree t = (Tree) malloc(sizeof(Node));
 	t -> x = element;
@@ -35,32 +35,46 @@ void traverse(Tree t){
 	}
 }
 
-int sumOfLeaves(Tree t, int sum){
+void sumOfLeaves(Tree t, int type = 0){
+		
 	if(!(t -> left) && !(t -> right)){
-		sum += t -> x;
-		return sum;
+		if(type == 0){
+			sum += t -> x;	
+		}
+		
 	}else{
 		if(t -> left){
-			sum = sumOfLeaves(t -> left, sum);	
+			sumOfLeaves(t -> left, 0);
 		}
 		if(t -> right){
-			sum = sumOfLeaves(t -> right, sum);	
-		}	
+			sumOfLeaves(t -> right, 1);
+		}
 	}
 }
 
 int main(int argc, char const *argv[])
 {
-	int root = 10;
+	int root = 50;
 	Tree t = NULL;
+	/* 
+              50
+           /     \
+          30      70
+         /  \    /  \
+       20   40  60   80 
+     */
 	t = insert(t, root);
-	insert(t, 2);
-	insert(t, 3);
-	insert(t, 12);
-	insert(t, 11);
-	insert(t, 13);
+	
+	insert(t, 30);
+	insert(t, 20);
+	insert(t, 40);
+	insert(t, 70);
+	insert(t, 60);
+	insert(t, 80);
+
 	traverse(t);
-	int sum = 0;
-	printf("\n%d", sumOfLeaves(t, sum));
+	sumOfLeaves(t);
+	printf("\n\t%d", sum);
 	return 0;
 }
+
