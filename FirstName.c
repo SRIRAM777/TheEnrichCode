@@ -21,15 +21,11 @@ char* parse(char *s){
 			k = l;
 		}
 	}
-
 	if(k == -1){
 		k = l;
 	}
-
-	
-
 	if(i == -1){
-		i = 0;
+		i = 1;
 	}else{
 		i++;	
 	}
@@ -37,7 +33,11 @@ char* parse(char *s){
 	while(i < k){
 		op[j++] = s[i++];
 	}
-	op[j] = 0;
+	if(op[j-1] == ' '){
+		op[j - 1] = 0;
+	}else{
+		op[j] = 0;	
+	}
 	return op;
 }
 int find(char *s){
@@ -69,13 +69,15 @@ int main(int argc, char const *argv[])
 	char tempName[100];
 	scanf("%d", &count);
 	studs = (struct stud *) malloc(sizeof(struct stud) * count);	
+
 	for(int i = 0; i < count; i++){
 		scanf("%d", &tempId);
 		gets(tempName);	
 		hash(tempId, tempName);
 	}
+
 	for(int i = 0; i < N; i++){
-		printf("%d %s [", studs[i].count, studs[i].name);
+		printf("%s, %d, [", studs[i].name, studs[i].count);
 		int tmpI = studs[i].i -1;
 		while(tmpI >= 0){
 			printf("%d, ", studs[i].ids[tmpI--]);
