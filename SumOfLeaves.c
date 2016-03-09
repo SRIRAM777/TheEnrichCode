@@ -35,7 +35,7 @@ void traverse(Tree t){
 	}
 }
 
-void sumOfLeaves(Tree t, int type = 0){
+void sumOfLeftLeaves(Tree t, int type = 0){
 		
 	if(!(t -> left) && !(t -> right)){
 		if(type == 0){
@@ -73,7 +73,7 @@ int main(int argc, char const *argv[])
 	insert(t, 80);
 
 	traverse(t);
-	sumOfLeaves(t);
+	sumOfLeftLeaves(t);
 	printf("\n\t%d", sum);
 	return 0;
 }
